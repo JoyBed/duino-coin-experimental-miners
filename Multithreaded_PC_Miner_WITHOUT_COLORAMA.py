@@ -3,12 +3,13 @@
 # https://github.com/revoxhere/duino-coin 
 # Distributed under MIT license
 # © Bilaboz, revox, MrKris7100 2020
+# modified by JoyBed to better suit Windows machines
 # --------------------------------------------------------------- #
 
 username = "USERNAME" # put your username here
 password = "PASSWORD" # put your password here
 
-refresh_time = 5 # refresh time in seconds for the output (recommended: 3.5)
+refresh_time = 5 # refresh time in seconds for the output (recommended: 5)
 autorestart_time = 300 # autorestart time in seconds. 0 = disabled
 
 discord_key = "" # coming soon
