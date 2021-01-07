@@ -5,8 +5,8 @@
 # © Bilaboz, revox, MrKris7100 2020
 # --------------------------------------------------------------- #
 
-username = "JoyBed" # put your username here
-password = "16090507" # put your password here
+username = "USERNAME" # put your username here
+password = "PASSWORD" # put your password here
 
 refresh_time = 5 # refresh time in seconds for the output (recommended: 3.5)
 autorestart_time = 300 # autorestart time in seconds. 0 = disabled
