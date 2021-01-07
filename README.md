@@ -1,5 +1,8 @@
-# duino-coin-experimental-miners
-Here I will post experiments with miners till eventualy something gets to the new version of the miner.
+# Duino-coin experimental miners
+
+Here I will post experiments with miners till eventualy something gets to the new version of the miner. I change some thing in the official
+so they can work on some specific machines or something like that... Nevermind of what I do I can say just one thing: 
+ITS EXPERIMENTAL USE AT YOUR OWN RISK(nothing bad wont happen)
 
 TODO: 
 1. Modify 1.7 and 1.8 release of Multithreaded miner to not contain Colorama to have the latest miners without them as option too.
