@@ -10,3 +10,5 @@ ITS EXPERIMENTAL USE AT YOUR OWN RISK(nothing bad wont happen)
 3. Include Arduino DUE and ESP32 as mining hardware too(no available libraries to do SHA1 hashing for them).
 4. Include RealTimeOS for the MCUs to stabilise mining and get more debugging info from them.
 5. Remake Multithreaded miner to not use a password, just username and threadcount.
+
+![alt text](https://i.ytimg.com/vi/9Rrt0n1oY8E/sddefault.jpg)
