@@ -11,4 +11,5 @@ ITS EXPERIMENTAL USE AT YOUR OWN RISK(nothing bad wont happen)
 4. Include RealTimeOS for the MCUs to stabilise mining and get more debugging info from them.
 5. Remake Multithreaded miner to not use a password, just username and threadcount.
 
+#### We need to find an answer for: #
 ![alt text](https://i.ytimg.com/vi/9Rrt0n1oY8E/sddefault.jpg)
