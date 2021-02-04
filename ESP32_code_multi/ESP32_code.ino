@@ -13,8 +13,6 @@ const char* ducouser = "JoyBed"; // Change this to your Duino-Coin username
 const char * host = "51.15.127.80"; // Static server IP
 const int port = 2811;
 
-
-
 //Task1code
 void Task1code( void * pvParameters ){
   unsigned int acceptedShares1 = 0; // Shares variables
@@ -24,9 +22,11 @@ void Task1code( void * pvParameters ){
   // Use WiFiClient class to create TCP connection
   WiFiClient client1;
   Serial.println(client1.connect(host, port));
+  Serial.println();
 
   String SERVER_VER = client1.readString(); // Server sends SERVER_VERSION after connecting
   Serial.println("CORE1 Connected to the server. Server version: " + String(SERVER_VER));
+  Serial.println();
   digitalWrite(LED_BUILTIN, HIGH);   // Turn off built-in led
   delay(150);
   digitalWrite(LED_BUILTIN, LOW);   // Turn on built-in led
@@ -35,6 +35,7 @@ void Task1code( void * pvParameters ){
 
   while (client1.connected()) {
     Serial.println("CORE1 Asking for a new job for user: " + String(ducouser));
+    Serial.println();
     client1.print("JOB," + String(ducouser) + ",ESP"); // Ask for new job
 
     String hash1 = client1.readStringUntil(','); // Read last block hash
@@ -51,6 +52,7 @@ void Task1code( void * pvParameters ){
     byte shaResult1[20];
     unsigned long diff1 =  (5000) * 100 + 1; // Low power devices use the low diff job, we don't read it as no termination character causes unnecessary network lag
     Serial.println("CORE1 Job received: " + String(hash1) + " " + String(job1) + " " + String(diff1));
+    Serial.println();
     unsigned long StartTime1 = micros(); // Start time measurement
 
     for (unsigned long iJob1 = 0; iJob1 < diff1; iJob1++) { // Difficulty loop
@@ -72,7 +74,7 @@ void Task1code( void * pvParameters ){
         String feedback1 = client1.readStringUntil('D'); // Receive feedback
         if (feedback1.indexOf("GOOD")) {
           acceptedShares1++;
-          Serial.println("CORE1 Accepted share #" + String(acceptedShares1) + " (" + String(iJob1) + ")" + " Hashrate: " + String(HashRate1));
+          Serial.println("CORE1 Accepted share #" + String(acceptedShares1) + " (" + String(iJob1) + ")" + " Hashrate: " + String(HashRate1) + "Free RAM: " + String(ESP.getFreeHeap()));
           Serial.println();
         } else {
           rejectedShares1++;
@@ -85,6 +87,7 @@ void Task1code( void * pvParameters ){
   }
 
   Serial.println("CORE1 Not connected. Restarting ESP");
+  Serial.println();
   esp_restart(); // Restart the board
 }
 
@@ -94,12 +97,15 @@ void Task2code( void * pvParameters ){
   unsigned int rejectedShares = 0;
 
   Serial.println("\nCORE2 Connecting to Duino-Coin server...");
+  Serial.println();
   // Use WiFiClient class to create TCP connection
   WiFiClient client;
   Serial.println(client.connect(host, port));
+  Serial.println();
 
   String SERVER_VER = client.readString(); // Server sends SERVER_VERSION after connecting
   Serial.println("CORE2 Connected to the server. Server version: " + String(SERVER_VER));
+  Serial.println();
   digitalWrite(LED_BUILTIN, HIGH);   // Turn off built-in led
   delay(150);
   digitalWrite(LED_BUILTIN, LOW);   // Turn on built-in led
@@ -107,6 +113,7 @@ void Task2code( void * pvParameters ){
   digitalWrite(LED_BUILTIN, HIGH);   // Turn off built-in led
   while (client.connected()) {
     Serial.println("CORE2 Asking for a new job for user: " + String(ducouser));
+    Serial.println();
     client.print("JOB," + String(ducouser) + ",ESP"); // Ask for new job
 
     String hash = client.readStringUntil(','); // Read last block hash
@@ -123,6 +130,7 @@ void Task2code( void * pvParameters ){
     byte shaResult[20];
     unsigned long diff =  (5000) * 100 + 1; // Low power devices use the low diff job, we don't read it as no termination character causes unnecessary network lag
     Serial.println("CORE2 Job received: " + String(hash) + " " + String(job) + " " + String(diff));
+    Serial.println();
     unsigned long StartTime = micros(); // Start time measurement
 
     for (unsigned long iJob = 0; iJob < diff; iJob++) { // Difficulty loop
@@ -157,6 +165,7 @@ void Task2code( void * pvParameters ){
   }
 
   Serial.println("CORE2 Not connected. Restarting ESP");
+  Serial.println();
   esp_restart(); // Restart the board
 }
 
@@ -175,9 +184,10 @@ void setup() {
   }
   Serial.println("\nConnected to WiFi!");
   Serial.println("Local IP address: " + WiFi.localIP().toString());
+  Serial.println();
   xTaskCreatePinnedToCore(Task1code,"Task1",10000,NULL,1,&Task1,0);  //create a task with priority 1 and executed on core 0            
   delay(500); 
-  xTaskCreatePinnedToCore(Task2code,"Task2",10000,NULL,1,&Task2,1);  //create a task with priority 1 and executed on core 1
+  xTaskCreatePinnedToCore(Task2code,"Task2",10000,NULL,2,&Task2,1);  //create a task with priority 1 and executed on core 1
   delay(500);
 }
 
