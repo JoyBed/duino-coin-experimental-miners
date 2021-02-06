@@ -68,8 +68,8 @@ void Task1code( void * pvParameters ){
       if (compareresult1 == 0) { // If result is found
         unsigned long EndTime1 = micros(); // End time measurement
         unsigned long ElapsedTime1 = EndTime1 - StartTime1; // Calculate elapsed time
-        float ElapsedTimeSeconds1 = ElapsedTime1 / 60; // Convert to seconds
-        float HashRate1 = ElapsedTime1 / 60; // Calculate hashrate
+        float ElapsedTimeSeconds1 = ElapsedTime1 / 1000; // Convert to seconds
+        float HashRate1 = ElapsedTime1 / iJob; // Calculate hashrate
         client1.print(String(iJob1) + "," + String(HashRate1) + ",ESP32 CORE1 Miner v1.8"); // Send result to server
         String feedback1 = client1.readStringUntil('D'); // Receive feedback
         if (feedback1.indexOf("GOOD")) {
@@ -146,8 +146,8 @@ void Task2code( void * pvParameters ){
       if (compareresult == 0) { // If result is found
         unsigned long EndTime = micros(); // End time measurement
         unsigned long ElapsedTime = EndTime - StartTime; // Calculate elapsed time
-        float ElapsedTimeSeconds = ElapsedTime / 60; // Convert to seconds
-        float HashRate = ElapsedTime / 60; // Calculate hashrate
+        float ElapsedTimeSeconds = ElapsedTime / 1000; // Convert to seconds
+        float HashRate = ElapsedTime / iJob; // Calculate hashrate
         client.print(String(iJob) + "," + String(HashRate) + ",ESP32 CORE2 Miner v1.8"); // Send result to server
         String feedback = client.readStringUntil('D'); // Receive feedback
         if (feedback.indexOf("GOOD")) {
