@@ -96,8 +96,8 @@ void loop() {
       if (result == job) { // If result is found
         unsigned long EndTime = micros(); // End time measurement
         unsigned long ElapsedTime = EndTime - StartTime; // Calculate elapsed time
-        float ElapsedTimeSeconds = ElapsedTime / 60; // Convert to seconds
-        float HashRate = ElapsedTime / 60; // Calculate hashrate
+        float ElapsedTimeSeconds = ElapsedTime / 1000; // Convert to seconds
+        float HashRate = ElapsedTime / iJob; // Calculate hashrate
         client.print(String(iJob) + "," + String(HashRate) + ",ESP Miner v1.8"); // Send result to server
 
         String feedback = client.readStringUntil('D'); // Receive feedback
