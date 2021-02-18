@@ -1,0 +1,6 @@
+178.40.218.176
+2812
+=================
+First line represents the pool IP address.
+Second line is the pool port.
+Other lines aren't used.
