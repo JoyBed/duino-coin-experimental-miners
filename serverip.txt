@@ -1,4 +1,4 @@
-joybed.ddns.net
+178.40.218.176
 2812
 =================
 First line represents the pool IP address.
