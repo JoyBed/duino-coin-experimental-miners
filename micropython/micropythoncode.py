@@ -17,10 +17,8 @@ try:
       difficulty = job[2]
       start = time.time() 
       for result in range(100 * int(difficulty) + 1): # Calculate hash with difficulty
-          ducos1 = uhashlib.sha1(str(job[0] + str(result))).digest() # Generate hash
-          ducos2 = str(ubinascii.hexlify(ducos1)) # Convert it to string
-          ducos3 = ducos2[2:42] # Remove unwanted characters from both ends
-          if job[1] == ducos3: # If result is even with job
+          ducos = str(ubinascii.hexlify(uhashlib.sha1(str(job[0] + str(result))).digest())) # Generate hash and convert it to string
+          if job[1] == ducos[2:42]: # If result is even with job
               end = time.time()
               hastime  = end - start
               hashrate = result / hastime
